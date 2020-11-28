@@ -6,14 +6,24 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+    <style>
+        .flex_center {
+            display: flex;
+            justify-content: center;
+        }
+
+        .bg {
+            background: greenyellow
+        }
+    </style>
 </head>
 <body>
-<div style="display: flex; justify-content: center">
+<div class="flex_center">
     <form action="/signUp" method="post">
         <input type="text" placeholder="Enter your name..." name="name">
         <input type="text" placeholder="Enter your email..." name="email">
         <input type="text" placeholder="Enter your password..." name="password">
-        <input type="submit" style="background:greenyellow"  value="Sign up">
+        <input type="submit" class="bg" value="Sign up">
     </form>
 </div>
 </body>
