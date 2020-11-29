@@ -27,6 +27,10 @@ app.post('/signUp', (({ body }, res) => {
     const errora = 'this email is already in use';
 
     fs.readFile(pathUsers, ((err, data) => {
+        if (err) {
+            console.log(err);
+        }
+
         const users = JSON.parse(data);
         const findUser = users.find((user) => user.email.toLowerCase() === email.toLowerCase());
 
@@ -34,6 +38,7 @@ app.post('/signUp', (({ body }, res) => {
             logined = true;
             users.push(body);
             const newUsers = JSON.stringify(users);
+
             fs.writeFile(pathUsers, newUsers, (err1) => console.log(err1));
             res.render('users', { users, name, logined });
             return;
@@ -54,6 +59,10 @@ app.post('/signIn', (({ body }, res) => {
     const errora = 'Incorrect Username or Email.';
 
     fs.readFile(pathUsers, ((err, data) => {
+        if (err) {
+            console.log(err);
+        }
+
         const users = JSON.parse(data);
         const findUser = users.find((user) => user.email === email);
 
