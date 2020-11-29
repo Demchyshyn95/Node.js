@@ -4,7 +4,7 @@ const path = require('path');
 const path1800 = path.join(process.cwd(), '1800');
 const path2000 = path.join(process.cwd(), '2000');
 
-const renameDir = async (dir) => {
+const renameDir = (dir) => {
     switch (dir) {
         case path2000: {
             fs.readdir(path2000, (err, files) => {

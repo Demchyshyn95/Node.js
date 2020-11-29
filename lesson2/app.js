@@ -28,7 +28,7 @@ app.post('/signUp', (({ body }, res) => {
 
     fs.readFile(pathUsers, ((err, data) => {
         const users = JSON.parse(data);
-        const findUser = users.find((user) => user.email === email);
+        const findUser = users.find((user) => user.email.toLowerCase() === email.toLowerCase());
 
         if (!findUser) {
             logined = true;
