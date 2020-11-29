@@ -25,10 +25,12 @@ app.get('/signUp', ((req, res) => {
 app.post('/signUp', (({ body }, res) => {
     const { email, name } = body;
     const errora = 'this email is already in use';
+    const mistake = 'Ops...something went wrong';
 
     fs.readFile(pathUsers, ((err, data) => {
         if (err) {
-            console.log(err);
+            res.render('error', { errora: mistake });
+            return;
         }
 
         const users = JSON.parse(data);
@@ -39,7 +41,12 @@ app.post('/signUp', (({ body }, res) => {
             users.push(body);
             const newUsers = JSON.stringify(users);
 
-            fs.writeFile(pathUsers, newUsers, (err1) => console.log(err1));
+            fs.writeFile(pathUsers, newUsers, (err1) => {
+                if (err1) {
+                    res.render('error', { errora: mistake });
+                }
+            });
+
             res.render('users', { users, name, logined });
             return;
         }
@@ -60,7 +67,10 @@ app.post('/signIn', (({ body }, res) => {
 
     fs.readFile(pathUsers, ((err, data) => {
         if (err) {
-            console.log(err);
+            const mistake = 'Ops...something went wrong';
+
+            res.render('error', { errora: mistake });
+            return;
         }
 
         const users = JSON.parse(data);
