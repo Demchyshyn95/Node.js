@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <style>
+        .flex_center {
+            display: flex;
+            justify-content: center;
+        }
+
+        .icon {
+            background: darkcyan;
+            color: white;
+            position: fixed;
+            right: 30px;
+        }
+
+        .wel {
+            color: lightseagreen
+        }
+    </style>
+    <title>Document</title>
+</head>
+<body>
+<div>
+    {{#if logined}}
+        <div class="flex_center">
+            <form method="post" action='/signUp/getUser'>
+                <input type="text" name="name" placeholder="Find User By name">
+                <input type="submit" value="Find User" class="wel">
+            </form>
+
+            <form method="get" action=`/signUp/deleteUser?name={{name}}`>
+                <input type="submit" name={{name}} value="DeleteAccount" class="wel">
+            </form>
+        </div>
+        <div class="flex_center">
+            <form method="get" action="/signIn">
+                <input type="submit" value="Sign out" class="icon">
+            </form>
+        </div>
+        <div class="flex_center wel">
+            <h2>WELCOME {{name}}</h2>
+        </div>
+
+    <div class="flex_center">
+        <ol>
+            {{#each users}}
+                <li>{{this.name}} - {{this.email}}</li>
+            {{/each}}
+        </ol>
+    {{else}}
+    </div>
+        <div class="flex_center">
+            <form action="/signIn" method="post">
+                <input type="text" name="name" placeholder="Enter your name...">
+                <input type="text" name="email" placeholder="Enter your email...">
+                <input type="submit" value="Sign In" class="wel">
+            </form>
+        </div>
+    {{/if}}
+</div>
+
+</body>
+</html>
