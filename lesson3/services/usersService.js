@@ -1,11 +1,12 @@
+const fs = require('fs');
+const path = require('path');
+
+const pathUsers = path.join(process.cwd(), './dateBase/users.json');
+const mistake = 'Ops...something went wrong';
+
 module.exports = {
     createNewUser: (user, logined, res) => {
-        const fs = require('fs');
-        const path = require('path');
-        const pathUsers = path.join(process.cwd(), './dateBase/users.json');
-
         const { name } = user;
-        const mistake = 'Ops...something went wrong';
 
         fs.readFile(pathUsers, ((err, data) => {
             if (err) {
@@ -35,9 +36,8 @@ module.exports = {
         res.render('users', { users, name, logined });
     },
 
-    deleteUser: ({ newUsers, logined }, res) => {
-        const users = newUsers;
-        fs.writeFile(pathUsers, newUsers, (err1) => {
+    deleteUser: ({ users, logined }, res) => {
+        fs.writeFile(pathUsers, JSON.stringify(users), (err1) => {
             if (err1) {
                 res.render('error', { errora: err1 });
             }

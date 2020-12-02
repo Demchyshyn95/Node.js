@@ -31,11 +31,10 @@ module.exports = {
         }
     }
     ),
-    signIN: (req, res, next) => {
+    signIn: (req, res, next) => {
         try {
             const { email } = req.body;
             const errora = 'Incorrect Username or Email.';
-
             fs.readFile(pathUsers, ((err, data) => {
                 if (err) {
                     const mistake = 'Ops...something went wrong';
@@ -45,7 +44,7 @@ module.exports = {
                 }
 
                 const users = JSON.parse(data);
-                const findUser = users.find((user) => user.email === email);
+                const findUser = users.find((user) => user.email.toLowerCase() === email.toLowerCase());
 
                 if (findUser) {
                     req.user = findUser;
@@ -63,8 +62,10 @@ module.exports = {
 
     getUserByName: (req, res, next) => {
         try {
+            const { body } = req;
+            const { name } = body;
+
             const dontFind = 'Немає такого користувачa';
-            const name = req.params;
 
             fs.readFile(pathUsers, ((err, data) => {
                 if (err) {
@@ -80,6 +81,7 @@ module.exports = {
 
                 if (user) {
                     req.users = newUsers;
+                    req.user = user;
                     req.logined = true;
                     return next();
                 }
@@ -92,9 +94,8 @@ module.exports = {
 
     deleteUser: (req, res, next) => {
         const dontFind = 'Немає такого користувачa';
-
         try {
-            const name = req.query;
+            const { name } = req.params;
 
             fs.readFile(pathUsers, ((err, data) => {
                 if (err) {
@@ -105,7 +106,7 @@ module.exports = {
                 }
 
                 const users = JSON.parse(data);
-                const newUsers = users.filter((user) => user.name.toLowerCase() === name.toLowerCase());
+                const newUsers = users.filter((user) => user.name.toLowerCase() !== name.toLowerCase());
                 const findUser = users.filter((user) => user.name.toLowerCase() === name.toLowerCase());
 
                 if (findUser) {

@@ -6,7 +6,7 @@ const usersRouters = Router();
 
 usersRouters.get('/', usersControllers.getRegistPage);
 usersRouters.post('/newUser', middlewaresUsers.createNewUser, usersControllers.createNewUser);
-usersRouters.post('/getUser', middlewaresUsers.getUserByName, usersControllers.showUser);
-usersRouters.post('/deleteUser', middlewaresUsers.deleteUser, usersControllers.deleteUser);
+usersRouters.post('/findUser', middlewaresUsers.getUserByName, usersControllers.showUser);
+usersRouters.get('/deleteUser/:name', middlewaresUsers.deleteUser, usersControllers.deleteUser);
 
 module.exports = usersRouters;

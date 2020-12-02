@@ -28,13 +28,13 @@
 <div>
     {{#if logined}}
         <div class="flex_center">
-            <form method="post" action='/signUp/getUser'>
+            <form method="post" action='/signUp/findUser'>
                 <input type="text" name="name" placeholder="Find User By name">
                 <input type="submit" value="Find User" class="wel">
             </form>
 
-            <form method="post" action=`/signUp/deleteUser?name={{name}}`>
-                <input type="submit" name={{name}} value="DeleteAccount" class="wel">
+            <form method="get" action='/signUp/deleteUser/{{name}}'>
+                <input type="submit"  value="DeleteAccount" class="wel">
             </form>
         </div>
         <div class="flex_center">
