@@ -13,6 +13,7 @@ module.exports = {
     createNewUser: ({ body, logined }, res) => {
         try {
             usersService.createNewUser(body, logined, res);
+            res.status(201).json('User crated');
         } catch (e) {
             res.render('error', { errora: e });
         }
