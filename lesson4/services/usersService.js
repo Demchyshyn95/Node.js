@@ -14,19 +14,21 @@ module.exports = {
     deleteUser: ({ params }) => {
         const UserModel = db.getModel('User');
         const { id } = params;
+
         return UserModel.destroy({
             where: { id }
         });
     },
 
-    updateUserById: (user, userId) => {
+    updateUserById: (user, { id }) => {
         const UserModel = db.getModel('User');
-        return UserModel.update(user,
-            {
-                where: {
-                    userId
-                }
-            });
+
+                return UserModel.update(user,
+                    {
+                        where: {
+                            id
+                        }
+                    });
     },
 
     getUserById_Car: ({ id }) => {
