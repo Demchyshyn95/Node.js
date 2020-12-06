@@ -2,7 +2,7 @@ const { usersService:{ updateUserById, deleteUser, createNewUser, getUserById_Ca
 
 module.exports = {
 
-    createNewUser: async ({ body }, res) => {
+    createdNewUser: async ({ body }, res) => {
         try {
             const newUser = await createNewUser(body);
 
@@ -12,7 +12,7 @@ module.exports = {
         }
     },
 
-    deleteUser: async (req, res) => {
+    deleteUserById: async (req, res) => {
         try {
             const newUsers = await deleteUser(req, res);
 
