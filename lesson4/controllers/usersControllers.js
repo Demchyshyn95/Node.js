@@ -1,10 +1,10 @@
-const { usersService } = require('../services');
+const { usersService:{ updateUserById, deleteUser, createNewUser, getUserById_Car, getUsers} } = require('../services');
 
 module.exports = {
 
     createNewUser: async ({ body }, res) => {
         try {
-            const newUser = await usersService.createNewUser(body);
+            const newUser = await createNewUser(body);
 
             res.status(201).json(newUser);
         } catch (e) {
@@ -14,7 +14,7 @@ module.exports = {
 
     deleteUser: async (req, res) => {
         try {
-            const newUsers = await (usersService.deleteUser(req, res));
+            const newUsers = await deleteUser(req, res);
 
             res.status(200).json(newUsers);
         } catch (e) {
@@ -24,7 +24,7 @@ module.exports = {
 
     getUsers: async (req, res) => {
         try {
-            const users = await usersService.getUsers();
+            const users = await getUsers();
 
             res.json(users);
         } catch (e) {
@@ -34,7 +34,7 @@ module.exports = {
 
     updateUserById: async ({ body, params }, res) => {
         try {
-            const user = await usersService.updateUserById(body, params);
+            const user = await updateUserById(body, params);
             res.json(user);
         } catch (e) {
             res.status(400).json(e.message);
@@ -43,7 +43,7 @@ module.exports = {
 
     getUserById_Car: async ({ params }, res) => {
         try {
-            const user = await usersService.getUserById_Car(params);
+            const user = await getUserById_Car(params);
             res.json(user);
         } catch (e) {
             res.status(400).json(e.message);

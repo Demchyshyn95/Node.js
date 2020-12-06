@@ -1,6 +1,6 @@
 const { Router } = require('express');
-const { usersControllers: { getUsers,updateUserById,deleteUser,createNewUser,getUserById_Car } } = require('../controllers');
-const { middlewaresUsers: { getUserById,createNewUser,deleteUser } } = require('../middlewares');
+const { usersControllers: { getUsers, updateUserById, deleteUser,createNewUser,getUserById_Car } } = require('../controllers');
+const { middlewaresUsers: { getUserById, createNewUser, deleteUser } } = require('../middlewares');
 
 const usersRouters = Router();
 

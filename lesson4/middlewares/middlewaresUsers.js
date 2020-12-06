@@ -1,11 +1,11 @@
-const { usersService } = require('../services');
+const { usersService: { getUsers } } = require('../services');
 
 module.exports = {
 
     createNewUser: async ({ body }, res, next) => {
         try {
             const { email } = body;
-            const users = await usersService.getUsers();
+            const users = await getUsers();
 
             users.forEach((user) => {
                 user.email.toLowerCase() === email.toLowerCase() ? res.status(404).json('email already exists') : next();
@@ -29,7 +29,7 @@ module.exports = {
     deleteUser: async ({ params }, res, next) => {
         try {
             const { id } = params;
-            const users = await usersService.getUsers();
+            const users = await getUsers();
 
             const findUser = users.find((user) => user.id == id);
 
