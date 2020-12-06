@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 
-const pathUsers = path.join(process.cwd(), './dateBase/users.json');
+const pathUsers = path.join(process.cwd(), './dataBase/users.json');
 
 module.exports = {
     createNewUser: ((req, res, next) => {
