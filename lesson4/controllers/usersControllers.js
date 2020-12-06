@@ -32,18 +32,18 @@ module.exports = {
         }
     },
 
-    getUserById: async (req, res) => {
+    updateUserById: async ({ body, params }, res) => {
         try {
-            const user = await usersService.getUserById(req, res);
+            const user = await usersService.updateUserById(body, params);
             res.json(user);
         } catch (e) {
             res.status(400).json(e.message);
         }
     },
 
-    updateUserById: async ({ body, params }, res) => {
+    getUserById_Car: async ({ params }, res) => {
         try {
-            const user = await usersService.updateUserById(body, params);
+            const user = await usersService.getUserById_Car(params);
             res.json(user);
         } catch (e) {
             res.status(400).json(e.message);

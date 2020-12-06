@@ -1,13 +1,13 @@
 const { Router } = require('express');
-const { usersControllers } = require('../controllers');
+const { usersControllers: {getUsers,updateUserById,deleteUser,createNewUser,getUserById_Car } } = require('../controllers');
 const { middlewaresUsers } = require('../middlewares');
 
 const usersRouters = Router();
 
-usersRouters.get('/', usersControllers.getUsers);
-usersRouters.get('/:id', middlewaresUsers.getUserById, usersControllers.getUserById);
-usersRouters.post('/', middlewaresUsers.createNewUser, usersControllers.createNewUser);
-usersRouters.put('/:id', middlewaresUsers.deleteUser, usersControllers.updateUserById);
-usersRouters.delete('/:id', middlewaresUsers.deleteUser, usersControllers.deleteUser);
+usersRouters.get('/', getUsers);
+usersRouters.get('/:id', middlewaresUsers.getUserById, getUserById_Car);
+usersRouters.post('/', middlewaresUsers.createNewUser, createNewUser);
+usersRouters.put('/:id', middlewaresUsers.deleteUser, updateUserById);
+usersRouters.delete('/:id', middlewaresUsers.deleteUser, deleteUser);
 
 module.exports = usersRouters;

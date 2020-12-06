@@ -6,12 +6,6 @@ module.exports = {
         return UserModel.findAll();
     },
 
-    getUserById: ({ id }) => {
-        const UserModel = db.getModel('User');
-
-        return UserModel.findByPk(id);
-    },
-
     createNewUser: (user) => {
         const UserModel = db.getModel('User');
         return UserModel.create(user);
@@ -33,5 +27,17 @@ module.exports = {
                     userId
                 }
             });
+    },
+
+    getUserById_Car: (userId) => {
+        const UserModel = db.getModel('User');
+        const CarModel = db.getModel('Car');
+
+        return CarModel.findAll({
+            where: {
+                id: userId
+            },
+            include: [{ model: UserModel, as: 'user' }]
+        });
     }
 };
