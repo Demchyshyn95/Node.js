@@ -29,14 +29,13 @@ module.exports = {
             });
     },
 
-    getUserById_Car: (userId) => {
+    getUserById_Car: ({ id }) => {
         const UserModel = db.getModel('User');
         const CarModel = db.getModel('Car');
 
         return CarModel.findAll({
-            where: {
-                id: userId
-            },
+            attributes: { exclude: ['user_id'] },
+            where: { user_id: id },
             include: [{ model: UserModel, as: 'user' }]
         });
     }
