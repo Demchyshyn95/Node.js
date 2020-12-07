@@ -1,26 +1,30 @@
-const { usersService: { getUsers } } = require('../services');
+const { usersService: { findUserEmail, getUserById } } = require('../services');
 
 module.exports = {
 
     createNewUser: async ({ body }, res, next) => {
         try {
             const { email } = body;
-            const users = await getUsers();
+            const user = await findUserEmail(email);
 
-            users.forEach((user) => {
-                user.email.toLowerCase() === email.toLowerCase() ? res.status(404).json('email already exists') : next();
-            });
+            user.length ? res.status(404).json('email already exists') : next();
         } catch (e) {
             res.status(400).json(e.message);
         }
     },
 
-    getUserById: async (req, res, next) => {
+    getUserById: async ({ params }, res, next) => {
         try {
-            const { id } = req.params;
-            req.id = id;
+            const { id } = params;
 
-            (id > 0 && id < 10) ? next() : res.status(404).json('incorrect id user_id(not less than 0 and not more than 10)');
+            if (id > 0 && id < 10) {
+                const user = await getUserById(id);
+                if (user.length) {
+                    return next();
+                }
+                return res.status(404).json('don\'t found a user with this id');
+            }
+            res.status(404).json('incorrect id user_id(not less than 0 and not more than 10)');
         } catch (e) {
             res.status(400).json(e.message);
         }
@@ -29,11 +33,15 @@ module.exports = {
     deleteUser: async ({ params }, res, next) => {
         try {
             const { id } = params;
-            const users = await getUsers();
 
-            const findUser = users.find((user) => user.id == id);
-
-            findUser ? next() : res.status(404).json('don\'t found a user with this id');
+            if (id > 0 && id < 10) {
+                const user = await getUserById(id);
+                if (user.length) {
+                    return next();
+                }
+                return res.status(404).json('don\'t found a user with this id');
+            }
+            res.status(404).json('incorrect id user_id(not less than 0 and not more than 10)');
         } catch (e) {
             res.status(400).json(e.message);
         }

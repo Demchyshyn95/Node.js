@@ -11,9 +11,8 @@ module.exports = {
         return UserModel.create(user);
     },
 
-    deleteUser: ({ params }) => {
+    deleteUser: ({ id }) => {
         const UserModel = db.getModel('User');
-        const { id } = params;
 
         return UserModel.destroy({
             where: { id }
@@ -40,5 +39,20 @@ module.exports = {
             where: { user_id: id },
             include: [{ model: UserModel, as: 'user' }]
         });
-    }
+    },
+
+    findUserEmail: (email) => {
+        const UserModel = db.getModel('User');
+        return UserModel.findAll({
+            where: { email }
+        });
+    },
+
+    getUserById: (id) => {
+        const UserModel = db.getModel('User');
+
+        return UserModel.findAll({
+            where: { id }
+        });
+    },
 };

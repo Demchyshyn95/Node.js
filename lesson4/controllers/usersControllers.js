@@ -12,9 +12,9 @@ module.exports = {
         }
     },
 
-    deleteUserById: async (req, res) => {
+    deleteUserById: async ({ params }, res) => {
         try {
-            const newUsers = await deleteUser(req, res);
+            const newUsers = await deleteUser(params);
 
             res.status(200).json(newUsers);
         } catch (e) {
