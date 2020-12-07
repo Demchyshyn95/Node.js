@@ -4,10 +4,19 @@ module.exports = {
 
     createNewUser: async ({ body }, res, next) => {
         try {
-            const { email } = body;
+            const { email, password, name } = body;
             const user = await findUserEmail(email);
 
-            user.length ? res.status(404).json('email already exists') : next();
+            if (!user.length) {
+                if (password) {
+                    if (name) {
+                        return next();
+                    }
+                    return res.status(404).json('incorrect user name');
+                }
+                return res.status(404).json('incorrect password');
+            }
+            res.status(404).json('email already exists');
         } catch (e) {
             res.status(400).json(e.message);
         }

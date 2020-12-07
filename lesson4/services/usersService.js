@@ -3,11 +3,13 @@ const db = require('../dataBase').getInstance();
 module.exports = {
     getUsers: () => {
         const UserModel = db.getModel('User');
+
         return UserModel.findAll();
     },
 
     createNewUser: (user) => {
         const UserModel = db.getModel('User');
+
         return UserModel.create(user);
     },
 
