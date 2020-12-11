@@ -9,7 +9,6 @@ module.exports = {
 
     createNewUser: (user) => {
         const UserModel = db.getModel('User');
-        console.log('CREATED');
         return UserModel.create(user);
     },
 
