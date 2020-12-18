@@ -80,7 +80,7 @@ module.exports = {
         ]);
     },
 
-    down: async (queryInterface, Sequelize) => {
+    down: async (queryInterface) => {
         await queryInterface.dropTable('users');
 
         await queryInterface.dropTable('cars');
